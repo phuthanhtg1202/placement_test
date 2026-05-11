@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐠 English Placement Test | Ocean World Adventure 🌊</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0077b6;
+    --sky: #90e0ef;
+    --sand: #fff9e6;
+    --coral: #ff6b6b;
+    --mint: #52b788;
+    --sun: #ffd166;
+    --bubble: #caf0f8;
+    --deep: #023e8a;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --card-shadow: 0 8px 32px rgba(0,119,182,0.13);
+    --radius: 20px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(160deg, #caf0f8 0%, #90e0ef 40%, #0077b6 100%);
+    min-height: 100vh;
+    color: var(--text);
+  }
+
+  /* Floating bubbles background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,0.18) 0 40px, transparent 40px),
+      radial-gradient(circle at 80% 10%, rgba(255,255,255,0.13) 0 60px, transparent 60px),
+      radial-gradient(circle at 60% 80%, rgba(255,255,255,0.10) 0 80px, transparent 80px),
+      radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0 30px, transparent 30px),
+      radial-gradient(circle at 90% 60%, rgba(255,255,255,0.09) 0 50px, transparent 50px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px 18px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--deep) 0%, var(--ocean) 100%);
+    border-radius: 28px;
+    padding: 36px 32px 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 12px 40px rgba(2,62,138,0.35);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '🐠 🐙 🦈 🐬 🐡 🦑 🐚';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    letter-spacing: 6px;
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+  .header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.4rem;
+    color: var(--sun);
+    letter-spacing: 1px;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    margin-bottom: 20px;
+  }
+  .header-fields {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .header-field {
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .header-field input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.5);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    outline: none;
+    width: 180px;
+    padding: 2px 4px;
+  }
+  .header-field input::placeholder { color: rgba(255,255,255,0.5); }
+
+  /* SECTION CARDS */
+  .section-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px 28px;
+    margin-bottom: 28px;
+    box-shadow: var(--card-shadow);
+    border: 3px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .section-card:hover { border-color: var(--sky); }
+
+  .section-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.45rem;
+    color: var(--deep);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-subtitle {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  /* AQUARIUM IMAGE STYLE (real photo) */
+  .aquarium-img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    border: 4px solid white;
+    background: #fef9e6;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+  .aquarium-img:hover {
+    transform: scale(1.01);
+  }
+
+  /* MULTIPLE CHOICE */
+  .question-block {
+    margin-bottom: 22px;
+  }
+  .question-label {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--deep);
+    margin-bottom: 10px;
+  }
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 2.5px solid #d0e8f5;
+    background: #f5fbff;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--text);
+    transition: all 0.18s;
+    text-align: left;
+    width: 100%;
+  }
+  .option-btn:hover { border-color: var(--ocean); background: var(--bubble); }
+  .option-btn.selected { border-color: var(--ocean); background: #caf0f8; color: var(--deep); }
+  .option-btn.correct { border-color: var(--mint); background: #d8f5e7; color: #1a6e3c; }
+  .option-btn.incorrect { border-color: var(--coral); background: #ffe5e5; color: #b00020; }
+  .option-btn.multi-select.selected { border-color: #f7a400; background: #fff4cc; }
+
+  .option-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2.5px solid #b0cde3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 900;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .option-btn.selected .option-circle { background: var(--ocean); border-color: var(--ocean); color: white; }
+  .option-btn.correct .option-circle { background: var(--mint); border-color: var(--mint); color: white; }
+  .option-btn.incorrect .option-circle { background: var(--coral); border-color: var(--coral); color: white; }
+  .option-btn.multi-select.selected .option-circle { background: #f7a400; border-color: #f7a400; color: white; border-radius: 4px; }
+
+  /* PART 2 COMPARATIVES - DRAG & DROP */
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+    background: #f0f8ff;
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 2px dashed #90e0ef;
+    min-height: 56px;
+  }
+  .word-chip {
+    background: var(--ocean);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    border-radius: 30px;
+    padding: 6px 18px;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    box-shadow: 0 3px 10px rgba(0,119,182,0.25);
+    touch-action: none;
+  }
+  .word-chip:hover { transform: scale(1.07); box-shadow: 0 6px 18px rgba(0,119,182,0.35); }
+  .word-chip.dragging { opacity: 0.4; transform: scale(1.12); }
+  .word-chip.used { opacity: 0.38; cursor: not-allowed; pointer-events: none; background: #aaa; }
+
+  .fill-sentence {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .drop-zone {
+    min-width: 140px;
+    min-height: 36px;
+    border-radius: 10px;
+    border: 2.5px dashed #90e0ef;
+    background: #f0faff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    transition: all 0.18s;
+    position: relative;
+    cursor: pointer;
+  }
+  .drop-zone.drag-over { border-color: var(--ocean); background: var(--bubble); transform: scale(1.04); }
+  .drop-zone.filled { border-color: var(--ocean); background: #caf0f8; cursor: pointer; }
+  .drop-zone.correct { border-color: var(--mint); background: #d8f5e7; }
+  .drop-zone.incorrect { border-color: var(--coral); background: #ffe5e5; }
+  .drop-chip {
+    background: var(--deep);
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    padding: 4px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .drop-chip .remove-btn {
+    cursor: pointer;
+    opacity: 0.7;
+    font-size: 0.8rem;
+    margin-left: 2px;
+  }
+  .drop-chip .remove-btn:hover { opacity: 1; }
+
+  .part2-images {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .part2-img-wrap {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  /* PART 3 MATCHING */
+  .match-container {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .match-column {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .match-item {
+    background: #f5fbff;
+    border: 2.5px solid #d0e8f5;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+  }
+  .match-item:hover { border-color: var(--ocean); background: var(--bubble); }
+  .match-item.selected-q { border-color: var(--ocean); background: #caf0f8; color: var(--deep); }
+  .match-item.selected-a { border-color: var(--sun); background: #fff4cc; color: #7a5800; }
+  .match-item.matched { border-color: var(--mint); background: #d8f5e7; cursor: default; }
+  .match-item.wrong { border-color: var(--coral); background: #ffe5e5; }
+  .match-badge {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--ocean);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .match-item.matched .match-badge { background: var(--mint); }
+  .match-item.selected-a .match-badge { background: var(--sun); color: #333; }
+
+  /* PART 4 EMERGENCY */
+  .emergency-block { margin-bottom: 24px; }
+  .emergency-scenario {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--coral);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* PART 5 LOOK AND WRITE */
+  .comic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 10px;
+  }
+  .comic-panel {
+    border-radius: 14px;
+    border: 3px solid #d0e8f5;
+    overflow: hidden;
+    background: #f5fbff;
+    display: flex;
+    flex-direction: column;
+  }
+  .comic-img-wrap {
+    position: relative;
+    background: #e8f4fd;
+    overflow: hidden;
+    text-align: center;
+    padding: 12px;
+  }
+  .comic-bubble {
+    background: white;
+    border: 2px solid #d0e8f5;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+  .inline-drop {
+    display: inline-flex;
+    align-items: center;
+    min-width: 100px;
+    min-height: 28px;
+    border-radius: 8px;
+    border: 2px dashed #90e0ef;
+    background: #f0faff;
+    padding: 2px 8px;
+    transition: all 0.18s;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .inline-drop.drag-over { border-color: var(--ocean); background: var(--bubble); }
+  .inline-drop.filled { border-color: var(--ocean); background: #caf0f8; }
+  .inline-drop .drop-chip { font-size: 0.8rem; padding: 2px 10px; }
+
+  /* PART 6 WORD BANK fill */
+  .p6-sentence {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 2.2;
+    margin-bottom: 6px;
+  }
+  .p6-drop {
+    display: inline-flex;
+    align-items: center;
+    min-width: 130px;
+    min-height: 32px;
+    border-radius: 8px;
+    border: 2.5px dashed #90e0ef;
+    background: #f0faff;
+    padding: 2px 8px;
+    transition: all 0.18s;
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 0 4px;
+  }
+  .p6-drop.drag-over { border-color: var(--ocean); background: var(--bubble); }
+  .p6-drop.filled { border-color: var(--ocean); background: #caf0f8; }
+  .p6-drop.correct { border-color: var(--mint); background: #d8f5e7; }
+  .p6-drop.incorrect { border-color: var(--coral); background: #ffe5e5; }
+
+  /* SUBMIT & SCORE */
+  .submit-area {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .check-btn {
+    background: linear-gradient(135deg, var(--ocean), var(--deep));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 16px 48px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(0,119,182,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .check-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,119,182,0.4); }
+  .check-btn:active { transform: translateY(0); }
+
+  .score-banner {
+    display: none;
+    background: linear-gradient(135deg, var(--deep), #0096c7);
+    color: white;
+    border-radius: 24px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 24px;
+    box-shadow: 0 12px 40px rgba(2,62,138,0.3);
+  }
+  .score-banner h2 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2rem;
+    color: var(--sun);
+    margin-bottom: 8px;
+  }
+  .score-number { font-size: 3.5rem; font-weight: 900; color: var(--sun); display: block; }
+
+  .reset-btn {
+    background: white;
+    color: var(--ocean);
+    border: 2.5px solid var(--ocean);
+    border-radius: 50px;
+    padding: 12px 36px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.18s;
+  }
+  .reset-btn:hover { background: var(--bubble); }
+
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--sky), transparent);
+    border-radius: 3px;
+    margin: 6px 0 20px;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.7rem; }
+    .match-container { flex-direction: column; }
+    .comic-grid { grid-template-columns: 1fr; }
+    .part2-images { flex-direction: column; align-items: center; }
+    .check-btn { font-size: 1.1rem; padding: 14px 32px; }
+  }
+
+  .wordbank-label {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--ocean);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .answer-key-note {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .image-credit {
+    font-size: 0.7rem;
+    text-align: right;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>🌟 English Placement Test 🌟</h1>
+    <div class="header-fields">
+      <div class="header-field">
+        👤 Student Name: <input type="text" placeholder="Your name..." id="studentName">
+      </div>
+      <div class="header-field">
+        📅 Date: <input type="date" id="testDate">
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 1: with REAL Ocean World Aquarium Poster Image -->
+  <div class="section-card">
+    <div class="section-title">🐠 Part 1: Read and Circle</div>
+    <div class="divider"></div>
+    <div class="section-subtitle">Look at the aquarium poster. Read carefully and choose the correct answer.</div>
+
+    <!-- ✅ REAL AQUARIUM IMAGE ADDED HERE -->
+    <!-- For hosting, place your image file (2cabe542-6911-4ac8-a84d-c0136d256d71.png) in the same folder and rename to "aquarium_poster.png" 
+         OR simply use the exact filename. Update src accordingly. -->
+    <img class="aquarium-img" 
+         src="aquarium_poster.png" 
+         alt="Ocean World Aquarium poster: daily shows 11am/2pm/4pm, shark tank, dolphin show, touch pool, gift shop, starfish, sea horses, don't touch the glass, tickets info."
+         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20200%22%3E%3Crect%20width%3D%22400%22%20height%3D%22200%22%20fill%3D%22%230077b6%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-size%3D%2216%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3E🌟%20OCEAN%20WORLD%20POSTER%20(please%20upload%20image)%3C%2Ftext%3E%3C%2Fsvg%3E'; this.alt='Ocean World Aquarium placeholder';">
+
+    <!-- Q1 -->
+    <div class="question-block">
+      <div class="question-label">1. What can you do at the aquarium?</div>
+      <div class="options-list" data-q="p1q1" data-answer="b">
+        <button class="option-btn" data-val="a" onclick="selectSingle(this)"><span class="option-circle">a</span> go camping</button>
+        <button class="option-btn" data-val="b" onclick="selectSingle(this)"><span class="option-circle">b</span> watch sea animals</button>
+        <button class="option-btn" data-val="c" onclick="selectSingle(this)"><span class="option-circle">c</span> ride a horse</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-block">
+      <div class="question-label">2. What's the biggest animal you can see there?</div>
+      <div class="options-list" data-q="p1q2" data-answer="b">
+        <button class="option-btn" data-val="a" onclick="selectSingle(this)"><span class="option-circle">a</span> dolphin</button>
+        <button class="option-btn" data-val="b" onclick="selectSingle(this)"><span class="option-circle">b</span> shark</button>
+        <button class="option-btn" data-val="c" onclick="selectSingle(this)"><span class="option-circle">c</span> turtle</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-block">
+      <div class="question-label">3. The shark is the ______ animal in the tank.</div>
+      <div class="options-list" data-q="p1q3" data-answer="b">
+        <button class="option-btn" data-val="a" onclick="selectSingle(this)"><span class="option-circle">a</span> smallest</button>
+        <button class="option-btn" data-val="b" onclick="selectSingle(this)"><span class="option-circle">b</span> longest</button>
+        <button class="option-btn" data-val="c" onclick="selectSingle(this)"><span class="option-circle">c</span> quietest</button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-block">
+      <div class="question-label">4. What can you see in the small round tank?</div>
+      <div class="options-list" data-q="p1q4" data-answer="b">
+        <button class="option-btn" data-val="a" onclick="selectSingle(this)"><span class="option-circle">a</span> turtles</button>
+        <button class="option-btn" data-val="b" onclick="selectSingle(this)"><span class="option-circle">b</span> starfish</button>
+        <button class="option-btn" data-val="c" onclick="selectSingle(this)"><span class="option-circle">c</span> sharks</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2,3,4,5,6 unchanged except improved DnD consistency -->
+  <div class="section-card">
+    <div class="section-title">✏️ Part 2: Comparatives</div>
+    <div class="divider"></div>
+    <div class="section-subtitle">Drag the correct comparative form into each blank.</div>
+    <div class="part2-images">
+      <div class="part2-img-wrap"><div style="font-size:4rem;">🐍 🦋</div><div>Snake vs Butterfly</div></div>
+      <div class="part2-img-wrap"><div style="font-size:4rem;">💻 📚</div><div style="font-size:0.9rem; font-weight:800;">💲1000 &nbsp; 💲12</div></div>
+      <div class="part2-img-wrap"><div style="font-size:4rem;">🍪 🫘</div><div>Cookies vs Beans</div></div>
+    </div>
+    <div class="wordbank-label">📦 Word Bank — drag words to blanks:</div>
+    <div class="word-bank" id="wb2">
+      <div class="word-chip" draggable="true" data-word="more dangerous than" id="wc-dangerous" ondragstart="onDragStart(event)">more dangerous than</div>
+      <div class="word-chip" draggable="true" data-word="more expensive than" id="wc-expensive" ondragstart="onDragStart(event)">more expensive than</div>
+      <div class="word-chip" draggable="true" data-word="more delicious than" id="wc-delicious" ondragstart="onDragStart(event)">more delicious than</div>
+    </div>
+    <div class="fill-sentence"><span>5. Snakes are</span> <div class="drop-zone" id="dz-p2-5" data-answer="more dangerous than" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></div> <span>butterflies.</span></div>
+    <div class="fill-sentence"><span>6. A computer is</span> <div class="drop-zone" id="dz-p2-6" data-answer="more expensive than" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></div> <span>a book.</span></div>
+    <div class="fill-sentence"><span>7. Cookies are</span> <div class="drop-zone" id="dz-p2-7" data-answer="more delicious than" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></div> <span>beans.</span></div>
+    <p class="answer-key-note">💡 Click a filled blank to return word to bank.</p>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🔮 Part 3: Match the Questions and Answers</div>
+    <div class="divider"></div>
+    <div class="section-subtitle">Click a question, then click its matching answer.</div>
+    <div class="match-container">
+      <div class="match-column" id="match-questions">
+        <div class="match-item" data-id="1" onclick="selectMatch(this,'q')"><div class="match-badge">1</div> Will we live under the ocean?</div>
+        <div class="match-item" data-id="2" onclick="selectMatch(this,'q')"><div class="match-badge">2</div> Will we live longer?</div>
+        <div class="match-item" data-id="3" onclick="selectMatch(this,'q')"><div class="match-badge">3</div> Will there be computers in every school?</div>
+        <div class="match-item" data-id="4" onclick="selectMatch(this,'q')"><div class="match-badge">4</div> Will your cellphone be smaller?</div>
+        <div class="match-item" data-id="5" onclick="selectMatch(this,'q')"><div class="match-badge">5</div> Will robots teach us?</div>
+      </div>
+      <div class="match-column" id="match-answers">
+        <div class="match-item" data-id="a" data-correct-q="3" onclick="selectMatch(this,'a')"><div class="match-badge" style="background:#f7a400;">a</div> Yes, there will.</div>
+        <div class="match-item" data-id="b" data-correct-q="5" onclick="selectMatch(this,'a')"><div class="match-badge" style="background:#f7a400;">b</div> No, they won't.</div>
+        <div class="match-item" data-id="c" data-correct-q="2" onclick="selectMatch(this,'a')"><div class="match-badge" style="background:#f7a400;">c</div> Yes, we will.</div>
+        <div class="match-item" data-id="d" data-correct-q="1" onclick="selectMatch(this,'a')"><div class="match-badge" style="background:#f7a400;">d</div> No, we won't.</div>
+        <div class="match-item" data-id="e" data-correct-q="4" onclick="selectMatch(this,'a')"><div class="match-badge" style="background:#f7a400;">e</div> Yes, it will.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🚨 Part 4: Emergency Situations</div>
+    <div class="divider"></div>
+    <div class="section-subtitle">Circle ALL correct actions (multiple answers possible).</div>
+    <div class="emergency-block"><div class="emergency-scenario">🔥 1. There's a fire at your school.</div>
+      <div class="options-list"><button class="option-btn multi-select" data-q="p4q1" data-val="a" data-correct="true" onclick="toggleMulti(this)"><span class="option-circle">a</span> sound the alarm ✅</button>
+      <button class="option-btn multi-select" data-q="p4q1" data-val="c" data-correct="false" onclick="toggleMulti(this)"><span class="option-circle">c</span> sit on your chair</button>
+      <button class="option-btn multi-select" data-q="p4q1" data-val="d" data-correct="true" onclick="toggleMulti(this)"><span class="option-circle">d</span> walk outside ✅</button>
+      <button class="option-btn multi-select" data-q="p4q1" data-val="e" data-correct="false" onclick="toggleMulti(this)"><span class="option-circle">e</span> play with your friends</button></div>
+    </div>
+    <div class="emergency-block"><div class="emergency-scenario">🤕 2. Your friend is hurt.</div>
+      <div class="options-list"><button class="option-btn multi-select" data-q="p4q2" data-val="a" data-correct="false" onclick="toggleMulti(this)"><span class="option-circle">a</span> play with a different friend</button>
+      <button class="option-btn multi-select" data-q="p4q2" data-val="b" data-correct="true" onclick="toggleMulti(this)"><span class="option-circle">b</span> tell a teacher ✅</button>
+      <button class="option-btn multi-select" data-q="p4q2" data-val="c" data-correct="true" onclick="toggleMulti(this)"><span class="option-circle">c</span> talk to your friend ✅</button>
+      <button class="option-btn multi-select" data-q="p4q2" data-val="d" data-correct="false" onclick="toggleMulti(this)"><span class="option-circle">d</span> shout</button>
+      <button class="option-btn multi-select" data-q="p4q2" data-val="e" data-correct="true" onclick="toggleMulti(this)"><span class="option-circle">e</span> call an ambulance ✅</button></div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">💬 Part 5: Look and Write</div>
+    <div class="divider"></div>
+    <div class="wordbank-label">📦 Word Bank:</div>
+    <div class="word-bank" id="wb5">
+      <div class="word-chip" draggable="true" data-word="clean up your room" id="wc5-clean" ondragstart="onDragStart(event)">clean up your room</div>
+      <div class="word-chip" draggable="true" data-word="water the flowers" id="wc5-water" ondragstart="onDragStart(event)">water the flowers</div>
+      <div class="word-chip" draggable="true" data-word="turn off the TV" id="wc5-tv" ondragstart="onDragStart(event)">turn off the TV</div>
+    </div>
+    <div class="comic-grid">
+      <div class="comic-panel" style="border-color:var(--mint);"><div class="comic-img-wrap"><div style="font-size:3rem;">📚🚪🧑</div><div>Girl carrying books → Boy at door</div></div><div class="comic-bubble"><span>1. Could you</span> <strong style="color:var(--mint);">open the door</strong> <span>please? ✅</span></div></div>
+      <div class="comic-panel"><div class="comic-img-wrap"><div style="font-size:3rem;">🎸🛏️🧺</div><div>Messy room — Mom disappointed</div></div><div class="comic-bubble"><span>2. Could you</span> <span class="inline-drop" id="dz-p5-2" data-answer="clean up your room" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div></div>
+      <div class="comic-panel"><div class="comic-img-wrap"><div style="font-size:3rem;">💐🌸🪣</div><div>Father & son watering flowers</div></div><div class="comic-bubble"><span>3. Could you</span> <span class="inline-drop" id="dz-p5-3" data-answer="water the flowers" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div></div>
+      <div class="comic-panel"><div class="comic-img-wrap"><div style="font-size:3rem;">📺🧒🧒</div><div>Kids watching TV — Mom gesturing</div></div><div class="comic-bubble"><span>4. Could you</span> <span class="inline-drop" id="dz-p5-4" data-answer="turn off the TV" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">📚 Part 6: Add the Correct Adjectives</div>
+    <div class="divider"></div>
+    <div class="wordbank-label">📦 Word Bank:</div>
+    <div class="word-bank" id="wb6">
+      <div class="word-chip" draggable="true" data-word="amazing" id="wc6-amazing" ondragstart="onDragStart(event)">amazing</div>
+      <div class="word-chip" draggable="true" data-word="dangerous" id="wc6-dangerous" ondragstart="onDragStart(event)">dangerous</div>
+      <div class="word-chip" draggable="true" data-word="brave" id="wc6-brave" ondragstart="onDragStart(event)">brave</div>
+      <div class="word-chip" draggable="true" data-word="romantic" id="wc6-romantic" ondragstart="onDragStart(event)">romantic</div>
+      <div class="word-chip" draggable="true" data-word="beautiful" id="wc6-beautiful" ondragstart="onDragStart(event)">beautiful</div>
+    </div>
+    <div style="background:#fff9e6; border:2px solid #ffd166; border-radius:16px; padding:20px;">
+      <div style="font-weight:800;">📖 Book of the Month: <em>Romance Island</em></div>
+      <div class="p6-sentence">This <span class="p6-drop" id="dz-p6-1" data-answer="amazing" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> story is about a girl. She sees a <span class="p6-drop" id="dz-p6-2" data-answer="dangerous" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> shark. There is a <span class="p6-drop" id="dz-p6-3" data-answer="brave" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> boy who saves her life. They go on a <span class="p6-drop" id="dz-p6-4" data-answer="romantic" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> boat trip to a <span class="p6-drop" id="dz-p6-5" data-answer="beautiful" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> island.</div>
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="check-btn" onclick="checkAnswers()">🌟 Check My Answers!</button>
+    <div class="score-banner" id="scoreBanner">
+      <h2>🎉 Test Complete!</h2>
+      <span class="score-number" id="scoreNumber"></span>
+      <p id="scoreMessage"></p>
+      <button class="reset-btn" onclick="resetTest()">🔄 Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function selectSingle(btn) { const list = btn.closest('.options-list'); list.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); }
+  function toggleMulti(btn) { btn.classList.toggle('selected'); }
+  let dragWord = null, dragSourceId = null;
+  function onDragStart(e) { dragWord = e.target.dataset.word; dragSourceId = e.target.id; e.target.classList.add('dragging'); e.dataTransfer.setData('text/plain', dragWord); setTimeout(() => e.target.classList.remove('dragging'), 200); }
+  function onDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+  function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+  function onDrop(e) {
+    e.preventDefault(); const zone = e.currentTarget; zone.classList.remove('drag-over');
+    if (!dragWord) return;
+    if (zone.dataset.current) returnToBank(zone.dataset.current);
+    zone.dataset.current = dragWord; zone.classList.add('filled');
+    zone.innerHTML = `<div class="drop-chip">${dragWord} <span class="remove-btn" onclick="removeChipFromBtn(event, this.closest('.drop-chip').parentElement)">✕</span></div>`;
+    const srcChip = document.getElementById(dragSourceId); if (srcChip) srcChip.classList.add('used');
+    dragWord = null; dragSourceId = null;
+  }
+  function removeChip(zone) { if (!zone.dataset.current) return; returnToBank(zone.dataset.current); zone.dataset.current = ''; zone.classList.remove('filled', 'correct', 'incorrect'); zone.innerHTML = ''; }
+  function removeChipFromBtn(e, zone) { e.stopPropagation(); removeChip(zone); }
+  function returnToBank(word) { document.querySelectorAll('.word-chip').forEach(c => { if (c.dataset.word === word) c.classList.remove('used'); }); }
+  let selectedQ = null, selectedA = null;
+  function selectMatch(item, type) {
+    if (item.classList.contains('matched')) return;
+    if (type === 'q') { if (selectedQ) selectedQ.classList.remove('selected-q'); if (item.classList.contains('selected-q')) { selectedQ = null; item.classList.remove('selected-q'); } else { selectedQ = item; item.classList.add('selected-q'); } }
+    else { if (selectedA) selectedA.classList.remove('selected-a'); if (item.classList.contains('selected-a')) { selectedA = null; item.classList.remove('selected-a'); } else { selectedA = item; item.classList.add('selected-a'); } }
+    if (selectedQ && selectedA) { const qId = parseInt(selectedQ.dataset.id); const correctQ = parseInt(selectedA.dataset.correctQ); if (qId === correctQ) { selectedQ.classList.remove('selected-q'); selectedA.classList.remove('selected-a'); selectedQ.classList.add('matched'); selectedA.classList.add('matched'); selectedQ.style.pointerEvents = 'none'; selectedA.style.pointerEvents = 'none'; } else { selectedQ.classList.add('wrong'); selectedA.classList.add('wrong'); setTimeout(() => { if (selectedQ) selectedQ.classList.remove('wrong','selected-q'); if (selectedA) selectedA.classList.remove('wrong','selected-a'); selectedQ = null; selectedA = null; }, 700); return; } selectedQ = null; selectedA = null; }
+  }
+  function checkAnswers() {
+    let total = 0, correct = 0;
+    document.querySelectorAll('.options-list[data-answer]').forEach(list => { total++; const answer = list.dataset.answer; const selected = list.querySelector('.option-btn.selected'); list.querySelectorAll('.option-btn').forEach(btn => { btn.disabled = true; if (btn.dataset.val === answer) btn.classList.add('correct'); }); if (selected && selected.dataset.val === answer) { correct++; selected.classList.add('correct'); } else if (selected) selected.classList.add('incorrect'); });
+    ['dz-p2-5','dz-p2-6','dz-p2-7'].forEach(id => { total++; const zone = document.getElementById(id); if (zone.dataset.current === zone.dataset.answer) { zone.classList.add('correct'); correct++; } else zone.classList.add('incorrect'); });
+    total += 5; correct += document.querySelectorAll('#match-questions .match-item.matched').length;
+    ['p4q1','p4q2'].forEach(q => { total++; const btns = document.querySelectorAll(`[data-q="${q}"]`); let allRight = true; btns.forEach(btn => { const isSelected = btn.classList.contains('selected'); const isCorrect = btn.dataset.correct === 'true'; btn.disabled = true; if (isCorrect) { btn.classList.add('correct'); if (!isSelected) allRight = false; } else { if (isSelected) { btn.classList.add('incorrect'); allRight = false; } } }); if (allRight) correct++; });
+    ['dz-p5-2','dz-p5-3','dz-p5-4'].forEach(id => { total++; const zone = document.getElementById(id); if (zone && zone.dataset.current === zone.dataset.answer) { zone.classList.add('filled'); zone.style.borderColor = 'var(--mint)'; zone.style.background = '#d8f5e7'; correct++; } else if (zone) { zone.style.borderColor = 'var(--coral)'; zone.style.background = '#ffe5e5'; } });
+    ['dz-p6-1','dz-p6-2','dz-p6-3','dz-p6-4','dz-p6-5'].forEach(id => { total++; const zone = document.getElementById(id); if (zone && zone.dataset.current === zone.dataset.answer) { zone.classList.add('correct'); correct++; } else if (zone) zone.classList.add('incorrect'); });
+    const pct = Math.round((correct / total) * 100); const banner = document.getElementById('scoreBanner'); document.getElementById('scoreNumber').textContent = `${correct} / ${total}`;
+    let msg = ''; if (pct >= 90) msg = '🌟 Excellent work! You\'re a star!'; else if (pct >= 70) msg = '👏 Great job! Keep it up!'; else if (pct >= 50) msg = '😊 Good effort! Review and try again!'; else msg = '📖 Keep studying — you can do it!'; document.getElementById('scoreMessage').textContent = `${pct}% — ${msg}`; banner.style.display = 'block'; banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function resetTest() { location.reload(); }
+  document.getElementById('testDate').valueAsDate = new Date();
+</script>
+</body>
+</html>
