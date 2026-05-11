@@ -357,7 +357,7 @@
     gap: 8px;
   }
 
-  /* PART 5 LOOK AND WRITE */
+  /* PART 5 LOOK AND WRITE with actual images */
   .comic-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -371,13 +371,28 @@
     background: #f5fbff;
     display: flex;
     flex-direction: column;
+    transition: box-shadow 0.2s;
+  }
+  .comic-panel:hover {
+    box-shadow: 0 6px 18px rgba(0,119,182,0.2);
   }
   .comic-img-wrap {
     position: relative;
     background: #e8f4fd;
     overflow: hidden;
     text-align: center;
-    padding: 12px;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .comic-img {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    background: #fef9e6;
+    display: block;
+    margin: 0 auto;
   }
   .comic-bubble {
     background: white;
@@ -436,6 +451,15 @@
   .p6-drop.filled { border-color: var(--ocean); background: #caf0f8; }
   .p6-drop.correct { border-color: var(--mint); background: #d8f5e7; }
   .p6-drop.incorrect { border-color: var(--coral); background: #ffe5e5; }
+
+  /* romance island illustration */
+  .romance-island-img {
+    max-width: 140px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    margin: 8px auto;
+    display: block;
+  }
 
   /* SUBMIT & SCORE */
   .submit-area {
@@ -551,13 +575,11 @@
     <div class="divider"></div>
     <div class="section-subtitle">Look at the aquarium poster. Read carefully and choose the correct answer.</div>
 
-    <!-- ✅ REAL AQUARIUM IMAGE ADDED HERE -->
-    <!-- For hosting, place your image file (2cabe542-6911-4ac8-a84d-c0136d256d71.png) in the same folder and rename to "aquarium_poster.png" 
-         OR simply use the exact filename. Update src accordingly. -->
+    <!-- Aquarium poster: use "aquarium_poster.png" (or rename your file to aquarium_poster.png) -->
     <img class="aquarium-img" 
          src="aquarium_poster.png" 
-         alt="Ocean World Aquarium poster: daily shows 11am/2pm/4pm, shark tank, dolphin show, touch pool, gift shop, starfish, sea horses, don't touch the glass, tickets info."
-         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20200%22%3E%3Crect%20width%3D%22400%22%20height%3D%22200%22%20fill%3D%22%230077b6%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-size%3D%2216%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3E🌟%20OCEAN%20WORLD%20POSTER%20(please%20upload%20image)%3C%2Ftext%3E%3C%2Fsvg%3E'; this.alt='Ocean World Aquarium placeholder';">
+         alt="Ocean World Aquarium poster"
+         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20200%22%3E%3Crect%20width%3D%22400%22%20height%3D%22200%22%20fill%3D%22%230077b6%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-size%3D%2216%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3E🌟%20OCEAN%20WORLD%20POSTER%3C%2Ftext%3E%3C%2Fsvg%3E';">
 
     <!-- Q1 -->
     <div class="question-block">
@@ -600,7 +622,7 @@
     </div>
   </div>
 
-  <!-- PART 2,3,4,5,6 unchanged except improved DnD consistency -->
+  <!-- PART 2 Comparatives -->
   <div class="section-card">
     <div class="section-title">✏️ Part 2: Comparatives</div>
     <div class="divider"></div>
@@ -622,6 +644,7 @@
     <p class="answer-key-note">💡 Click a filled blank to return word to bank.</p>
   </div>
 
+  <!-- PART 3 Matching -->
   <div class="section-card">
     <div class="section-title">🔮 Part 3: Match the Questions and Answers</div>
     <div class="divider"></div>
@@ -644,6 +667,7 @@
     </div>
   </div>
 
+  <!-- PART 4 Emergency -->
   <div class="section-card">
     <div class="section-title">🚨 Part 4: Emergency Situations</div>
     <div class="divider"></div>
@@ -663,6 +687,7 @@
     </div>
   </div>
 
+  <!-- PART 5 Look and Write with PNG images -->
   <div class="section-card">
     <div class="section-title">💬 Part 5: Look and Write</div>
     <div class="divider"></div>
@@ -673,13 +698,40 @@
       <div class="word-chip" draggable="true" data-word="turn off the TV" id="wc5-tv" ondragstart="onDragStart(event)">turn off the TV</div>
     </div>
     <div class="comic-grid">
-      <div class="comic-panel" style="border-color:var(--mint);"><div class="comic-img-wrap"><div style="font-size:3rem;">📚🚪🧑</div><div>Girl carrying books → Boy at door</div></div><div class="comic-bubble"><span>1. Could you</span> <strong style="color:var(--mint);">open the door</strong> <span>please? ✅</span></div></div>
-      <div class="comic-panel"><div class="comic-img-wrap"><div style="font-size:3rem;">🎸🛏️🧺</div><div>Messy room — Mom disappointed</div></div><div class="comic-bubble"><span>2. Could you</span> <span class="inline-drop" id="dz-p5-2" data-answer="clean up your room" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div></div>
-      <div class="comic-panel"><div class="comic-img-wrap"><div style="font-size:3rem;">💐🌸🪣</div><div>Father & son watering flowers</div></div><div class="comic-bubble"><span>3. Could you</span> <span class="inline-drop" id="dz-p5-3" data-answer="water the flowers" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div></div>
-      <div class="comic-panel"><div class="comic-img-wrap"><div style="font-size:3rem;">📺🧒🧒</div><div>Kids watching TV — Mom gesturing</div></div><div class="comic-bubble"><span>4. Could you</span> <span class="inline-drop" id="dz-p5-4" data-answer="turn off the TV" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div></div>
+      <!-- Panel 1: open the door (example) -->
+      <div class="comic-panel" style="border-color:var(--mint);">
+        <div class="comic-img-wrap">
+          <img class="comic-img" src="open_the_door.png" alt="Open the door scene" onerror="this.style.display='none'; this.nextSibling?.style?.display? 'block' : ''; this.insertAdjacentHTML('afterend', '<div style=\"font-size:2.5rem;\">🚪📚</div>');">
+          <div style="display:none;">🚪📚</div>
+        </div>
+        <div class="comic-bubble"><span>1. Could you</span> <strong style="color:var(--mint);">open the door</strong> <span>please? ✅</span></div>
+      </div>
+      <!-- Panel 2: clean up your room -->
+      <div class="comic-panel">
+        <div class="comic-img-wrap">
+          <img class="comic-img" src="clean_up_your_room.png" alt="Clean up your room" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<div style=\"font-size:2.5rem;\">🧹🧸</div>');">
+        </div>
+        <div class="comic-bubble"><span>2. Could you</span> <span class="inline-drop" id="dz-p5-2" data-answer="clean up your room" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div>
+      </div>
+      <!-- Panel 3: water the flowers -->
+      <div class="comic-panel">
+        <div class="comic-img-wrap">
+          <img class="comic-img" src="water_the_flowers.png" alt="Water the flowers" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<div style=\"font-size:2.5rem;\">💐🪣</div>');">
+        </div>
+        <div class="comic-bubble"><span>3. Could you</span> <span class="inline-drop" id="dz-p5-3" data-answer="water the flowers" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div>
+      </div>
+      <!-- Panel 4: turn off the TV -->
+      <div class="comic-panel">
+        <div class="comic-img-wrap">
+          <img class="comic-img" src="turn_off_the_tv.png" alt="Turn off the TV" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<div style=\"font-size:2.5rem;\">📺🔌</div>');">
+        </div>
+        <div class="comic-bubble"><span>4. Could you</span> <span class="inline-drop" id="dz-p5-4" data-answer="turn off the TV" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> <span>please?</span></div>
+      </div>
     </div>
+    <p class="answer-key-note">💡 Drag words into speech bubbles. Click a filled blank to remove a word.</p>
   </div>
 
+  <!-- PART 6 Adjectives + Romance Island image -->
   <div class="section-card">
     <div class="section-title">📚 Part 6: Add the Correct Adjectives</div>
     <div class="divider"></div>
@@ -691,9 +743,15 @@
       <div class="word-chip" draggable="true" data-word="romantic" id="wc6-romantic" ondragstart="onDragStart(event)">romantic</div>
       <div class="word-chip" draggable="true" data-word="beautiful" id="wc6-beautiful" ondragstart="onDragStart(event)">beautiful</div>
     </div>
-    <div style="background:#fff9e6; border:2px solid #ffd166; border-radius:16px; padding:20px;">
-      <div style="font-weight:800;">📖 Book of the Month: <em>Romance Island</em></div>
-      <div class="p6-sentence">This <span class="p6-drop" id="dz-p6-1" data-answer="amazing" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> story is about a girl. She sees a <span class="p6-drop" id="dz-p6-2" data-answer="dangerous" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> shark. There is a <span class="p6-drop" id="dz-p6-3" data-answer="brave" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> boy who saves her life. They go on a <span class="p6-drop" id="dz-p6-4" data-answer="romantic" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> boat trip to a <span class="p6-drop" id="dz-p6-5" data-answer="beautiful" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> island.</div>
+    <div style="background:#fff9e6; border:2px solid #ffd166; border-radius:16px; padding:20px; display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
+      <div style="flex:2;">
+        <div style="font-family:'Baloo 2',cursive; font-size:1.2rem; color:var(--deep);">📖 Book of the Month: <em>Romance Island</em></div>
+        <div class="p6-sentence">This <span class="p6-drop" id="dz-p6-1" data-answer="amazing" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> story is about a girl. She sees a <span class="p6-drop" id="dz-p6-2" data-answer="dangerous" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> shark. There is a <span class="p6-drop" id="dz-p6-3" data-answer="brave" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> boy who saves her life. They go on a <span class="p6-drop" id="dz-p6-4" data-answer="romantic" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> boat trip to a <span class="p6-drop" id="dz-p6-5" data-answer="beautiful" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)" onclick="removeChip(this)"></span> island.</div>
+      </div>
+      <div style="text-align:center; flex:1;">
+        <img class="romance-island-img" src="romantic_island.png" alt="Romance Island cover" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<div style=\"font-size:3rem;\">🏝️📖</div>');">
+        <div style="font-weight:800; margin-top:6px;">⭐ Romantic Island</div>
+      </div>
     </div>
   </div>
 
